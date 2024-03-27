@@ -79,27 +79,17 @@ public class ArtistController {
     public String getArtistsByFullName(@RequestParam(value = "fullname", required = false) String fullname, Model model) {
         List<Artist> artists;
         if (fullname != null && !fullname.isEmpty()) {
-            // Получение клиентов с указанным номером паспорта из сервиса
             artists = artistService.getArtistsByFullName(fullname);
         } else {
-            // Получение всех клиентов из сервиса
             artists = artistService.getAllArtists();
         }
 
         if (artists != null) {
-            // Если список клиентов успешно получен, добавляем сообщение об успешном выполнении
             model.addAttribute("message", "Get Success");
         } else {
-            // Если список клиентов не получен (например, из-за ошибки), добавляем сообщение об ошибке
             model.addAttribute("message", "Get Failure");
         }
-
-        // Помещаем полученные данные в модель для передачи на страницу ViewArtistList.jsp
         model.addAttribute("artists", artists);
-
-        // Возвращаем имя представления ViewArtistList.jsp
         return "ViewArtistList";
     }
-
-
 }

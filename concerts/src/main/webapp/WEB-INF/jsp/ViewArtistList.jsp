@@ -34,10 +34,10 @@
            color: white;
          }
         .btn-success {
-          border-color: var(--clr-primary-5); /* Измените цвет рамки на цвет вашего фона */
+          border-color: var(--clr-primary-5);
         }
         .btn-danger {
-          border-color: var(--clr-primary-5); /* Измените цвет рамки на цвет вашего фона */
+          border-color: var(--clr-primary-5);
         }
 
 .btn-end{
@@ -51,7 +51,7 @@ width:170px;
 }
 @media (min-width: 576px) {
     .ml-sm-3, .mx-sm-3 {
-        margin-left: 0 !important; /* Устанавливаем отступ на 0 */
+        margin-left: 0 !important;
     }
 .form-group {
     padding: 0rem 0rem;

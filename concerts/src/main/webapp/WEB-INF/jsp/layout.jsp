@@ -10,17 +10,15 @@
 </head>
 <style>
  body {
-   background: var(--clr-grey-10); /* Добавляем стиль var(--clr-grey-10) к фону body */
-   /* Другие свойства body */
+   background: var(--clr-grey-10);
  }
  .section {
      padding: 2rem 0;
  }
  .btn {
-   text-align: center; /* Выравниваем текст по центру */
-   display: block; /* Делаем кнопку блочным элементом, чтобы она занимала всю доступную ширину */
-   margin: 0 auto; /* Центрируем блочный элемент по горизонтали */
-   /* Остальные стили кнопки */
+   text-align: center;
+   display: block;
+   margin: 0 auto;
    margin-bottom: 1.5rem;
    width:250px;
  }

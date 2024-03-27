@@ -31,11 +31,11 @@
            color: white;
          }
         .btn-success {
-          border-color: var(--clr-primary-5); /* Измените цвет рамки на цвет вашего фона */
+          border-color: var(--clr-primary-5);
           margin-left: 0.5rem;
         }
         .btn-danger {
-          border-color: var(--clr-primary-5); /* Измените цвет рамки на цвет вашего фона */
+          border-color: var(--clr-primary-5);
         }
 .form-group {
 padding: 0rem 0rem;
@@ -170,5 +170,4 @@ width:170px;
 
 
 </body>
-
 </html>
