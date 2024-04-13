@@ -36,21 +36,21 @@ margin-top: 3.5rem;
                 <h2 style="text-align: center;"><span>Разделы</span></h2>
             </div>
             <div class="section-center services-center">
-<a href="/viewArtistList" class="btn" >Концерты</a>
+<a href="/viewConcertList" class="btn" >Концерты</a>
             </div>
 <div class="section-center services-center">
 <a href="/viewArtistList" class="btn" >Артисты</a>
             </div>
 <div class="section-center services-center">
-<a href="/viewArtistList" class="btn" >Технические райдеры</a>
+<a href="/viewTechnicalRiderList" class="btn" >Технические райдеры</a>
             </div>
 <div class="section-center services-center">
-<a href="/viewArtistList" class="btn" >Сцены</a>
+<a href="/viewSceneList" class="btn" >Сцены</a>
             </div>
 <div class="section-center services-center">
-<a href="/viewArtistList" class="btn" >Билеты</a>
+<a href="/viewTicketList" class="btn" >Билеты</a>
             </div>
-<div class="section-center services-center">
+<%--<div class="section-center services-center">
 <a href="/viewArtistList" class="btn" >Работники</a>
             </div>
 <div class="section-center services-center">
@@ -61,7 +61,7 @@ margin-top: 3.5rem;
             </div>
 <div class="section-center services-center">
 <a href="/viewArtistList" class="btn" >Рекламные кампании</a>
-            </div>
+            </div>--%>
 <div class="section-center services-center btn-end">
 <a href="/main" class="btn" >На главную</a>
             </div>
