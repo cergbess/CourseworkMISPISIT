@@ -41,7 +41,7 @@
           border-color: var(--clr-primary-5);
         }
         .btn-add{
-            width:1260px;
+            width:1335px;
         }
         .container {
             margin-left: 125px;
@@ -49,7 +49,7 @@
 
         .btn-end {
             width: 170px;
-            margin-left: 170px;
+            margin-left: 250px;
         }
 .form-inline .form-control {
     display: inline-block;
@@ -81,7 +81,7 @@
 <form action="/getTechnicalRidersByArtist" method="GET" class="form-inline">
         <div class="form-group mx-sm-3 mb-2">
             <label for="artistid" class="sr-only">Полное ися</label>
-            <input type="text" class="form-control" id="artistid" name="artistid" placeholder="Введите номер артиста">
+            <input type="text" class="form-control" id="artistid" name="artistid" placeholder="Введите имя артиста">
         </div>
         <button type="submit" class="btn btn-get">Получить райдеры</button>
     </form>
@@ -90,19 +90,19 @@
 <form:form>
 <table class="table table-bordered">
 <tr>
-    <th>Id</th>
-    <th>ArtistId</th>
-    <th>ConcertName</th>
-    <th>SceneSize</th>
-    <th>Lighting
-        Devices</th>
-    <th>Sound
-        Systems</th>
-    <th>SpecialEffects
-        AndDecorations</th>
-    <th>Workers
-        Count</th>
-    <th>MaxExpense</th>
+    <th>Номер</th>
+    <th>ФИО артиста</th>
+    <th>Название концерта</th>
+    <th>Размер сцены</th>
+    <th>Световые
+        устройства</th>
+    <th>Звуковые
+        системы</th>
+    <th>Спецэффекты
+        и декорации</th>
+    <th>Количество
+        рабочих</th>
+    <th>Максимальные расходы</th>
 
     <c:forEach var="technicalRider" items="${technicalriders}">
     <tr>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -71,7 +73,7 @@ public class SceneController {
     public String getScenesByFullName(@RequestParam(value = "scenename", required = false) String scenename, Model model) {
         List<Scene> scenes;
         if (scenename != null && !scenename.isEmpty()) {
-            scenes = sceneService.getScenesBySceneName(scenename);
+            scenes = Collections.singletonList(sceneService.getScenesBySceneName(scenename));
         } else {
             scenes = sceneService.getAllScenes();
         }

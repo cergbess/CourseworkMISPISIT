@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface ISceneRepository extends JpaRepository<Scene, Long> {
-    List<Scene> findBySceneName(String scenename);
+    Scene findBySceneName(String scenename);
 }

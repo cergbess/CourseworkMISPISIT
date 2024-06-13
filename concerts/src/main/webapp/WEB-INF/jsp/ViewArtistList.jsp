@@ -82,12 +82,12 @@ width:170px;
 <form:form>
 <table class="table table-bordered">
 <tr>
-    <th>Id</th>
-    <th>FullName</th>
-    <th>ManagerFullName</th>
-    <th>ContactInfo</th>
-    <th>PopularityIndex</th>
-    <th>FeeAmount</th>
+    <th>Номер</th>
+    <th>ФИО</th>
+    <th>Менеджер</th>
+    <th>Контакты</th>
+    <th>Индекс популярности</th>
+    <th>Гонорар</th>
 
     <c:forEach var="artist" items="${artists}">
     <tr>

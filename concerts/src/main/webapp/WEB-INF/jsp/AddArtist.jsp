@@ -81,7 +81,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="fullName">Full Name</label>
+                <label class="col-md-3" for="fullName">ФИО</label>
                 <div class="col-md-6">
                     <input type="text" name="fullName" id="fullName" class="form-control input-sm" required="required" />
                 </div>
@@ -90,7 +90,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="managerFullName">Manager Full Name</label>
+                <label class="col-md-3" for="managerFullName">Менеджер</label>
                 <div class="col-md-6">
                     <input type="text" name="managerFullName" id="managerFullName" class="form-control input-sm" />
                 </div>
@@ -99,7 +99,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="contactInfo">Contact Info</label>
+                <label class="col-md-3" for="contactInfo">Контакты</label>
                 <div class="col-md-6">
                     <input type="text" name="contactInfo" id="contactInfo" class="form-control input-sm" required="required" />
                 </div>
@@ -108,7 +108,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="popularityIndex">Popularity Index</label>
+                <label class="col-md-3" for="popularityIndex">Индекс популярности</label>
                 <div class="col-md-6">
                     <input type="number" name="popularityIndex" id="popularityIndex" class="form-control input-sm" required="required" />
                 </div>
@@ -117,7 +117,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="feeAmount">Fee Amount</label>
+                <label class="col-md-3" for="feeAmount">Гонорар</label>
                 <div class="col-md-6">
                     <input type="number" name="feeAmount" id="feeAmount" class="form-control input-sm" required="required" />
                 </div>
@@ -126,7 +126,7 @@ padding: 0rem 0rem;
 
         <div class="row p-2">
             <div class="col-md-2">
-                <button type="submit" value="Register" class="btn btn-success">Save</button>
+                <button type="submit" value="Register" class="btn btn-success">Сохранить</button>
             </div>
         </div>
 

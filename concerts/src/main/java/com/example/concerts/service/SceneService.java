@@ -12,7 +12,7 @@ import java.util.List;
 public class SceneService {
     @Autowired
     ISceneRepository scenerepo;
-    public List<Scene> getScenesBySceneName(String scenename) {
+    public Scene getScenesBySceneName(String scenename) {
         return scenerepo.findBySceneName(scenename);
     }
     public List<Scene> getAllScenes(){

@@ -87,25 +87,29 @@ width:170px;
 
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3" for="concertId">Concert ID</label>
+                    <label class="col-md-3" for="concertId">Концерт</label>
                     <div class="col-md-6">
-                        <input type="number" name="concertId" id="concertId" class="form-control input-sm" value="${ticket.concertId}" required="required" />
+                        <input type="text" name="concertId" id="concertId" class="form-control input-sm" value="${ticket.concertId}" required="required" />
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3" for="ticketCategory">Ticket Category</label>
+                    <%--@declare id="ticketcategory"--%><label class="col-md-3" for="ticketCategory">Категория</label>
                     <div class="col-md-6">
-                        <input type="text" name="ticketCategory" id="ticketCategory" class="form-control input-sm" value="${ticket.ticketCategory}" required="required" />
+                        <select name="ticketCategory" class="form-control input-sm">
+                            <option value="VIP" <c:if test="${ticket.ticketCategory == 'VIP'}">selected</c:if>>VIP</option>
+                            <option value="Standart" <c:if test="${ticket.ticketCategory == 'Standart'}">selected</c:if>>Standart</option>
+                            <option value="Dance Floor" <c:if test="${ticket.ticketCategory == 'Dance Floor'}">selected</c:if>>Dance Floor</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3" for="ticketPrice">Ticket Price</label>
+                    <label class="col-md-3" for="ticketPrice">Цена</label>
                     <div class="col-md-6">
                         <input type="number" name="ticketPrice" id="ticketPrice" class="form-control input-sm" value="${ticket.ticketPrice}" required="required" />
                     </div>
@@ -114,7 +118,7 @@ width:170px;
 
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3" for="totalTicketsCount">Total Tickets Count</label>
+                    <label class="col-md-3" for="totalTicketsCount">Всего</label>
                     <div class="col-md-6">
                         <input type="number" name="totalTicketsCount" id="totalTicketsCount" class="form-control input-sm" value="${ticket.totalTicketsCount}" required="required" />
                     </div>
@@ -123,7 +127,7 @@ width:170px;
 
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3" for="soldTicketsCount">Sold Tickets Count</label>
+                    <label class="col-md-3" for="soldTicketsCount">Продано</label>
                     <div class="col-md-6">
                         <input type="number" name="soldTicketsCount" id="soldTicketsCount" class="form-control input-sm" value="${ticket.soldTicketsCount}" required="required" />
                     </div>
@@ -132,7 +136,7 @@ width:170px;
 
             <div class="row p-2">
                 <div class="col-md-2">
-                    <button type="submit" value="Register" class="btn btn-success">Save</button>
+                    <button type="submit" value="Register" class="btn btn-success">Сохранить</button>
                 </div>
             </div>
 

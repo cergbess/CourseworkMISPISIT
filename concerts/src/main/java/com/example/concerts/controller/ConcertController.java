@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -74,7 +75,7 @@ public class ConcertController {
     public String getConcertsByFullName(@RequestParam(value = "concertname", required = false) String concertname, Model model) {
         List<Concert> concerts;
         if (concertname != null && !concertname.isEmpty()) {
-            concerts = concertService.getConcertsByConcertName(concertname);
+            concerts = Collections.singletonList(concertService.getConcertsByConcertName(concertname));
         } else {
             concerts = concertService.getAllConcerts();
         }

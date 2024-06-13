@@ -12,7 +12,7 @@ import java.util.List;
 public class ArtistService {
     @Autowired
     IArtistRepository artistrepo;
-    public List<Artist> getArtistsByFullName(String fullname) {
+    public Artist getArtistsByFullName(String fullname) {
         return artistrepo.findByFullName(fullname);
     }
     public List<Artist> getAllArtists(){

@@ -40,11 +40,12 @@
           border-color: var(--clr-primary-5);
         }
         .btn-add{
-            width:1165px;
+            width:1230px;
         }
 
 .btn-end{
 width:170px;
+    margin-left: 160px;
 }
 
 .form-inline .form-control {
@@ -85,19 +86,19 @@ width:170px;
 <form:form>
 <table class="table table-bordered">
 <tr>
-    <th>Id</th>
-    <th>SceneName</th>
-    <th>PricePer
-        Performance</th>
-    <th>SceneSize</th>
-    <th>Audience
-        Seats</th>
-    <th>Lighting
-        Devices</th>
-    <th>Sound
-        Systems</th>
-    <th>SpecialEffects
-        AndDecorations</th>
+    <th>Номер</th>
+    <th>Название</th>
+    <th>Цена за
+        выступление</th>
+    <th>Размер сцены</th>
+    <th>Количество
+        мест</th>
+    <th>Световые
+        устройства</th>
+    <th>Звуковые
+        Системы</th>
+    <th>Спецэффекты
+        и декорации</th>
 
     <c:forEach var="scene" items="${scenes}">
     <tr>

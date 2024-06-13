@@ -11,7 +11,7 @@ public class Ticket {
     private Long id;
 
     @Column(name = "concertid")
-    private Long concertId;
+    private String concertName;
 
     @Column(name = "ticketcategory", nullable = false)
     private String ticketCategory;
@@ -36,12 +36,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public Long getConcertId() {
-        return concertId;
+    public String getConcertId() {
+        return concertName;
     }
 
-    public void setConcertId(Long concertId) {
-        this.concertId = concertId;
+    public void setConcertId(String concertId) {
+        this.concertName = concertId;
     }
 
     public String getTicketCategory() {

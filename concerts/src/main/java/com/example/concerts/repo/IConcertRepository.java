@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface IConcertRepository extends JpaRepository<Concert, Long> {
-    List<Concert> findByConcertName(String concertname);
+    Concert findByConcertName(String concertname);
 }

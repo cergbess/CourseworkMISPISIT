@@ -5,12 +5,9 @@ import com.example.concerts.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 
 @Controller
@@ -33,13 +30,16 @@ public class TicketController {
     }
 
     @PostMapping("/saveTicket")
-    public String saveTicket(Ticket ticket, RedirectAttributes redirectAttributes){
-        if (ticketService.saveOrUpdateTicket(ticket)){
+    public String saveTicket(Ticket ticket, RedirectAttributes redirectAttributes) {
+        try {
+            ticketService.saveOrUpdateTicket(ticket);
             redirectAttributes.addFlashAttribute("message", "Save Success");
             return "redirect:/viewTicketList";
+        } catch (RuntimeException ex) {
+            redirectAttributes.addFlashAttribute("message", "Save Failure");
+            redirectAttributes.addFlashAttribute("errorMsg", ex.getMessage());
+            return "redirect:/AddTicket";
         }
-        redirectAttributes.addFlashAttribute("message","Save Failure");
-        return "redirect:/AddTicket";
     }
 
     @GetMapping("/editTicket/{id}")
@@ -79,9 +79,32 @@ public class TicketController {
         if (tickets != null) {
             model.addAttribute("message", "Get Success");
         } else {
-            model.addAttribute("message", "Get Failure");
+            model.addAttribute("error", "Get Failure");
         }
         model.addAttribute("tickets", tickets);
         return "ViewTicketList";
+    }
+
+    @GetMapping("/calculatePrice")
+    @ResponseBody
+    public Integer calculatePrice(@RequestParam("concertName") String concertName,
+                                 @RequestParam("ticketCategory") String ticketCategory) {
+
+        String artistName = ticketService.getArtistName(concertName);
+        String sceneName = ticketService.getSceneName(concertName);
+
+        double basePrice = ticketService.calculateTicketPrice(artistName,sceneName);
+
+        double categoryMultiplier = 1.0;
+        if (ticketCategory.equals("VIP")) {
+            categoryMultiplier = 1.5;
+        } else if (ticketCategory.equals("Standart")) {
+            categoryMultiplier = 1.3;
+        } else if (ticketCategory.equals("Dance Floor")) {
+            categoryMultiplier = 1.2;
+        }
+        double finalPrice = basePrice * categoryMultiplier;
+
+        return (int) Math.round(finalPrice);
     }
 }

@@ -45,6 +45,7 @@
 width:170px;
 }
 
+
 .form-inline .form-control {
     display: inline-block;
     width: 300px;
@@ -81,34 +82,44 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="concertId">Concert Id</label>
+                <label class="col-md-3" for="concertId">Концерт</label>
                 <div class="col-md-6">
-                    <input type="number" name="concertId" id="concertId" class="form-control input-sm" required="required" />
+                    <input type="text" name="concertId" id="concertId" class="form-control input-sm" required="required" />
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="ticketCategory">Ticket Category</label>
+                <label class="col-md-3" for="ticketCategory">Категория</label>
                 <div class="col-md-6">
-                    <input type="text" name="ticketCategory" id="ticketCategory" class="form-control input-sm" required="required" />
+                    <select name="ticketCategory" id="ticketCategory" class="form-control input-sm" required="required">
+                        <option value="VIP">VIP</option>
+                        <option value="Standart">Standart</option>
+                        <option value="Dance Floor">Dance Floor</option>
+                    </select>
                 </div>
             </div>
         </div>
 
+
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="ticketPrice">Ticket Price</label>
-                <div class="col-md-6">
+                <label class="col-md-3" for="ticketPrice">Цена</label>
+                <div class="col-md-6 input-group">
                     <input type="number" name="ticketPrice" id="ticketPrice" class="form-control input-sm" required="required" />
+                    <input type="hidden" name="calculatedPrice" id="calculatedPrice" />
+                    <span class="input-group-btn">
+                <button type="button" id="calculatePrice" class="btn btn-success btn-end">Рассчитать</button>
+            </span>
                 </div>
             </div>
         </div>
 
+
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="totalTicketsCount">Total Tickets Count</label>
+                <label class="col-md-3" for="totalTicketsCount">Всего</label>
                 <div class="col-md-6">
                     <input type="number" name="totalTicketsCount" id="totalTicketsCount" class="form-control input-sm" required="required" />
                 </div>
@@ -117,7 +128,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="soldTicketsCount">Sold Tickets Count</label>
+                <label class="col-md-3" for="soldTicketsCount">Продано</label>
                 <div class="col-md-6">
                     <input type="number" name="soldTicketsCount" id="soldTicketsCount" class="form-control input-sm" required="required" />
                 </div>
@@ -126,7 +137,7 @@ padding: 0rem 0rem;
 
         <div class="row p-2">
             <div class="col-md-2">
-                <button type="submit" value="Register" class="btn btn-success">Save</button>
+                <button type="submit" value="Register" class="btn btn-success">Сохранить</button>
             </div>
         </div>
 
@@ -140,7 +151,7 @@ padding: 0rem 0rem;
                  var msg = "${message}";
                  console.log(msg);
                  if (msg == "Save Failure") {
-     				Command: toastr["error"]("Something went wrong with the save.")
+     				Command: toastr["error"]("Количество билетов превышает доступное")
      			}
 
      			toastr.options = {
@@ -160,6 +171,22 @@ padding: 0rem 0rem;
                        "hideMethod": "fadeOut"
                      }
      	    }
+             document.getElementById('calculatePrice').addEventListener('click', function() {
+                 var concertName = document.getElementById('concertId').value;
+                 var ticketCategory = document.getElementById('ticketCategory').value;
+
+                 // Отправляем запрос на сервер для расчета цены
+                 fetch('/calculatePrice?concertName=' + concertName + '&ticketCategory=' + ticketCategory)
+                     .then(response => response.json())
+                     .then(data => {
+                         // Помещаем рассчитанную цену в скрытое поле
+                         document.getElementById('calculatedPrice').value = data;
+                         // Отображаем рассчитанную цену в поле ticketPrice
+                         document.getElementById('ticketPrice').value = data;
+                     })
+                     .catch(error => console.error('Ошибка:', error));
+             });
+
          </script>
 
 </body>

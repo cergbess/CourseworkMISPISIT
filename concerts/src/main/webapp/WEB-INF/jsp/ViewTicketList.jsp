@@ -82,12 +82,12 @@ width:170px;
 <form:form>
 <table class="table table-bordered">
 <tr>
-    <th>Id</th>
-    <th>ConcertId</th>
-    <th>TicketCategory</th>
-    <th>TicketPrice</th>
-    <th>TotalTicketsCount</th>
-    <th>SoldTicketsCount</th>
+    <th>Номер</th>
+    <th>Концерт</th>
+    <th>Категория</th>
+    <th>Цена</th>
+    <th>Всего</th>
+    <th>Продано</th>
 
     <c:forEach var="ticket" items="${tickets}">
     <tr>

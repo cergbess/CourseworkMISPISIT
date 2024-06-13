@@ -12,7 +12,7 @@ import java.util.List;
 public class TechnicalRiderService {
     @Autowired
     ITechnicalRiderRepository technicalriderrepo;
-    public List<TechnicalRider> getTechnicalRidersByArtist(Integer artistid) {
+    public List<TechnicalRider> getTechnicalRidersByArtist(String artistid) {
         return technicalriderrepo.findByArtistId(artistid);
     }
     public List<TechnicalRider> getAllTechnicalRiders(){

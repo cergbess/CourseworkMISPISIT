@@ -20,7 +20,7 @@ public class TechnicalRiderController {
 
     @GetMapping({"/viewTechnicalRiderList"})
     public String viewTechnicalRiderList(@ModelAttribute("message")String message, Model model){
-        getTechnicalRidersByFullName(0, model);
+        getTechnicalRidersByFullName("", model);
         model.addAttribute("technicalriderList",technicalriderService.getAllTechnicalRiders());
         model.addAttribute("message", message);
         return "ViewTechnicalRiderList";
@@ -68,9 +68,9 @@ public class TechnicalRiderController {
         return "redirect:/viewTechnicalRiderList";
     }
     @GetMapping("/getTechnicalRidersByArtist")
-    public String getTechnicalRidersByFullName(@RequestParam(value = "artistid", required = false) Integer artistid, Model model) {
+    public String getTechnicalRidersByFullName(@RequestParam(value = "artistid", required = false) String artistid, Model model) {
         List<TechnicalRider> technicalriders;
-        if (artistid != null && artistid != 0) {
+        if (artistid != null && !artistid.isEmpty()) {
             technicalriders = technicalriderService.getTechnicalRidersByArtist(artistid);
         } else {
             technicalriders = technicalriderService.getAllTechnicalRiders();

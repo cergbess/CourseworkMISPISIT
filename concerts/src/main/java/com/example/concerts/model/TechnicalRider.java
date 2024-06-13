@@ -11,7 +11,7 @@ public class TechnicalRider {
     private Long id;
 
     @Column(name = "artistid")
-    private Integer artistId;
+    private String artistId;
 
     @Column(name = "concertname", nullable = false)
     private String concertName;
@@ -45,11 +45,11 @@ public class TechnicalRider {
         this.id = id;
     }
 
-    public Integer getArtistId() {
+    public String getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(Integer artistId) {
+    public void setArtistId(String artistId) {
         this.artistId = artistId;
     }
 

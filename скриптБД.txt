@@ -1,0 +1,271 @@
+Скрипт БД
+
+CREATE TABLE Scenes (
+    Id SERIAL PRIMARY KEY,
+    SceneName VARCHAR(50) NOT NULL unique,
+    PricePerPerformance DECIMAL NOT NULL,
+    SceneSize VARCHAR(50) NOT NULL,
+    AudienceSeats INTEGER NOT NULL,
+    LightingDevices INTEGER NOT NULL,
+    SoundSystems INTEGER NOT NULL,
+    SpecialEffectsAndDecorations VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Artists (
+    Id SERIAL PRIMARY KEY,
+    FullName VARCHAR(50) NOT NULL unique,
+    ManagerFullName VARCHAR(50),
+    ContactInfo VARCHAR(50) NOT NULL,
+    PopularityIndex INTEGER NOT NULL,
+    FeeAmount DECIMAL NOT NULL
+);
+
+CREATE TABLE TechnicalRiders (
+    Id SERIAL PRIMARY KEY,
+    ArtistId VARCHAR(50) REFERENCES Artists(FullName) ON DELETE CASCADE,
+    ConcertName VARCHAR(50) NOT NULL,
+    SceneSize VARCHAR(50) NOT NULL,
+    LightingDevices INTEGER NOT NULL,
+    SoundSystems INTEGER NOT NULL,
+    SpecialEffectsAndDecorations VARCHAR(50) NOT NULL,
+    WorkersCount INTEGER NOT NULL,
+    MaxExpense DECIMAL NOT NULL
+);
+
+CREATE TABLE Concerts (
+    Id SERIAL PRIMARY KEY,
+    ArtistId VARCHAR(50) REFERENCES Artists(FullName) ON DELETE CASCADE,
+    SceneId VARCHAR(50) REFERENCES Scenes(SceneName) ON DELETE CASCADE,
+    ConcertName VARCHAR(50) NOT NULL unique,
+    ConcertDateTime TIMESTAMP NOT NULL,
+    AudienceCount INTEGER NOT NULL,
+    Passed BOOLEAN DEFAULT FALSE NOT NULL
+);
+
+CREATE TABLE Tickets (
+    Id SERIAL PRIMARY KEY,
+    ConcertId VARCHAR(50) REFERENCES Concerts(ConcertName) ON DELETE CASCADE,
+    TicketCategory VARCHAR(50) NOT NULL,
+    TicketPrice DECIMAL NOT NULL,
+    TotalTicketsCount INTEGER NOT NULL,
+    SoldTicketsCount INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE AdvertisingOffers (
+    Id SERIAL PRIMARY KEY,
+    CompanyName VARCHAR(50) NOT NULL,
+    Price DECIMAL NOT NULL,
+    AdvertisementType VARCHAR(50) NOT NULL,
+    DurationInDays INTEGER NOT NULL
+);
+
+CREATE TABLE AdvertisingCampaigns (
+    Id SERIAL PRIMARY KEY,
+    ConcertId INTEGER REFERENCES Concerts(Id) ON DELETE CASCADE,
+    AdvertisingOfferId INTEGER REFERENCES AdvertisingOffers(Id) ON DELETE CASCADE,
+    CampaignStartDate DATE NOT NULL
+);
+
+CREATE TABLE Workers (
+    Id SERIAL PRIMARY KEY,
+    FullName VARCHAR(50) NOT NULL,
+    Specialty VARCHAR(50) NOT NULL,
+    Qualification VARCHAR(50),
+    ExperienceYears INTEGER,
+    Salary DECIMAL NOT NULL,
+    ContactInfo VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Employments (
+    Id SERIAL PRIMARY KEY,
+    ConcertId INTEGER REFERENCES Concerts(Id) ON DELETE CASCADE,
+    WorkerId INTEGER REFERENCES Workers(Id) ON DELETE CASCADE,
+    WorkHours INTEGER NOT NULL
+);
+
+процедуры:
+
+CREATE OR REPLACE PROCEDURE AddDataToTable(
+    IN table_name VARCHAR(50),
+    IN column_names VARCHAR(255),
+    IN column_values VARCHAR(255)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    EXECUTE format('INSERT INTO %I (%s) VALUES (%s)', table_name, column_names, column_values);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE UpdateDataInTable(
+    IN table_name VARCHAR(50),
+    IN set_clause VARCHAR(255),
+    IN where_clause VARCHAR(255)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    EXECUTE format('UPDATE %I SET %s WHERE %s', table_name, set_clause, where_clause);
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE DeleteDataFromTable(
+    IN table_name VARCHAR(50),
+    IN where_clause VARCHAR(255)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    EXECUTE format('DELETE FROM %I WHERE %s', table_name, where_clause);
+END;
+$$;
+
+примеры вызова процедур:
+
+CALL AddDataToTable('scenes', 'scenename, priceperperformance, scenesize, audienceseats, 
+					lightingdevices, soundsystems, specialeffectsanddecorations', 
+                    '''Main Stage'', 1000.00, ''Large'', 500, 20, 10, ''Fireworks''');
+
+CALL UpdateDataInTable('scenes', 'priceperperformance = 1200.00, audienceseats = 600', 'scenename = ''Main Stage''');
+
+CALL DeleteDataFromTable('scenes', 'scenename = ''Main Stage''');
+
+вспомогательные запросы помогавшие мне
+SELECT
+    concerts.id,
+    scenes.audienceseats,
+    SUM(tickets.totalticketscount) AS totalticketscount,
+    SUM(tickets.soldticketscount) AS soldticketscount
+FROM scenes
+JOIN concerts ON scenes.Id = concerts.SceneId
+JOIN tickets ON concerts.Id = tickets.ConcertId
+GROUP BY concerts.id, scenes.audienceseats;
+
+
+
+INSERT INTO Tickets (ConcertId, TicketCategory, TicketPrice, TotalTicketsCount, SoldTicketsCount)
+VALUES 
+    (1, 'Regular', 50.00, 300, 150);
+
+
+
+SELECT
+artists.id,
+artists.popularityindex,
+SUM(tickets.totalticketscount) AS totalticketscount,
+SUM(tickets.soldticketscount) AS soldticketscount,
+concerts.passed
+FROM artists
+JOIN concerts ON artists.Id = concerts.Artistid
+JOIN tickets ON concerts.Id = tickets.ConcertId
+GROUP BY concerts.id, artists.id
+
+
+
+триггеры после изменения 
+CREATE OR REPLACE FUNCTION checkTicketAvailability()
+RETURNS TRIGGER AS $$
+DECLARE
+    totalTicketsCount INTEGER;
+    sceneSeats INTEGER;
+BEGIN
+    -- Суммируем количество билетов для указанного концерта
+    SELECT COALESCE(SUM(t.TotalTicketsCount), 0)
+    INTO totalTicketsCount
+    FROM Tickets t
+    WHERE t.ConcertId = NEW.ConcertId;
+
+    -- Получаем количество мест в сцене, где будет проходить концерт
+    SELECT s.AudienceSeats
+    INTO sceneSeats
+    FROM Scenes s
+    INNER JOIN Concerts c ON s.SceneName = c.SceneId
+    WHERE c.ConcertName = NEW.ConcertId;
+
+    -- Добавляем новые билеты к уже существующим
+    totalTicketsCount := totalTicketsCount + NEW.TotalTicketsCount;
+
+    -- Проверяем, превышает ли общее количество билетов количество мест
+    IF totalTicketsCount > sceneSeats THEN
+        RAISE EXCEPTION 'Total tickets sold exceeds available scene seats';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Создание триггера для проверки доступности билетов перед вставкой записи
+CREATE TRIGGER checkTicketAvailabilityTrigger
+BEFORE INSERT ON Tickets
+FOR EACH ROW
+EXECUTE FUNCTION checkTicketAvailability();
+
+CREATE OR REPLACE FUNCTION updateSoldTicketsCount()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Concerts
+    SET AudienceCount = AudienceCount + NEW.SoldTicketsCount - OLD.SoldTicketsCount
+    WHERE ConcertName = NEW.ConcertId;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER ticketsSoldTrigger
+AFTER UPDATE OF SoldTicketsCount ON Tickets
+FOR EACH ROW
+EXECUTE FUNCTION updateSoldTicketsCount();
+
+
+CREATE OR REPLACE FUNCTION calculateArtistPopularity() 
+RETURNS TRIGGER AS $$
+DECLARE
+    artistName VARCHAR(50);
+    totalSoldTickets INTEGER;
+    totalTicketsCount INTEGER;
+    newPopularity DECIMAL;
+BEGIN
+    IF NEW.Passed = TRUE THEN
+        artistName := NEW.ArtistId;
+
+        SELECT COALESCE(SUM(T.SoldTicketsCount), 0), COALESCE(SUM(T.TotalTicketsCount), 0)
+        INTO totalSoldTickets, totalTicketsCount
+        FROM Tickets T
+        INNER JOIN Concerts C ON T.ConcertId = C.ConcertName
+        WHERE C.ArtistId = NEW.ArtistId AND C.Passed = TRUE;
+
+        IF totalTicketsCount > 0 THEN
+            newPopularity := totalSoldTickets * 1.0 / totalTicketsCount * 100;
+        ELSE
+            newPopularity := 0;
+        END IF;
+
+        UPDATE Artists
+        SET PopularityIndex = newPopularity
+        WHERE FullName = artistName;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER calculateArtistPopularityTrigger
+AFTER UPDATE OF Passed ON Concerts
+FOR EACH ROW
+EXECUTE FUNCTION calculateArtistPopularity();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

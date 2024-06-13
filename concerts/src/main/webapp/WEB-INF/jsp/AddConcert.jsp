@@ -81,25 +81,25 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="artistId">Artist ID</label>
+                <label class="col-md-3" for="artistId">Артист</label>
                 <div class="col-md-6">
-                    <input type="number" name="artistId" id="artistId" class="form-control input-sm" required="required" />
+                    <input type="text" name="artistId" id="artistId" class="form-control input-sm" required="required" />
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="sceneId">Scene ID</label>
+                <label class="col-md-3" for="sceneId">Сцена</label>
                 <div class="col-md-6">
-                    <input type="number" name="sceneId" id="sceneId" class="form-control input-sm" required="required" />
+                    <input type="text" name="sceneId" id="sceneId" class="form-control input-sm" required="required" />
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="concertName">Concert Name</label>
+                <label class="col-md-3" for="concertName">Название</label>
                 <div class="col-md-6">
                     <input type="text" name="concertName" id="concertName" class="form-control input-sm" required="required" />
                 </div>
@@ -108,7 +108,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="concertDateTime">Concert Date and Time</label>
+                <label class="col-md-3" for="concertDateTime">Дата проведения</label>
                 <div class="col-md-6">
                     <input type="datetime-local" name="concertDateTime" id="concertDateTime" class="form-control input-sm" required="required" />
                 </div>
@@ -117,7 +117,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="audienceCount">Audience Count</label>
+                <label class="col-md-3" for="audienceCount">Количество зрителей</label>
                 <div class="col-md-6">
                     <input type="number" name="audienceCount" id="audienceCount" class="form-control input-sm" required="required" />
                 </div>
@@ -126,7 +126,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="passed">Passed</label>
+                <label class="col-md-3" for="passed">Прошедший</label>
                 <div class="col-md-6">
                     <select name="passed" id="passed" class="form-control input-sm" required="required">
                         <option value="true">True</option>
@@ -138,7 +138,7 @@ padding: 0rem 0rem;
 
         <div class="row p-2">
             <div class="col-md-2">
-                <button type="submit" value="Register" class="btn btn-success">Save</button>
+                <button type="submit" value="Register" class="btn btn-success">Сохранить</button>
             </div>
         </div>
 

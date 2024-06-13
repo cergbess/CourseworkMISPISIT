@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ITechnicalRiderRepository extends JpaRepository<TechnicalRider, Long> {
-    List<TechnicalRider> findByArtistId(Integer artistid);
+    List<TechnicalRider> findByArtistId(String artistid);
 }

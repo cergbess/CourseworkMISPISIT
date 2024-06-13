@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -75,11 +77,17 @@ public class ArtistController {
     public String showMainPage() {
         return "main";
     }
+    @GetMapping("/report")
+    public String showReportPage() {
+        return "report";
+    }
+
+
     @GetMapping("/getArtistsByFullName")
     public String getArtistsByFullName(@RequestParam(value = "fullname", required = false) String fullname, Model model) {
         List<Artist> artists;
         if (fullname != null && !fullname.isEmpty()) {
-            artists = artistService.getArtistsByFullName(fullname);
+            artists = Collections.singletonList(artistService.getArtistsByFullName(fullname));
         } else {
             artists = artistService.getAllArtists();
         }

@@ -79,16 +79,17 @@ width:170px;
     </form>
 
 
+
 <form:form>
 <table class="table table-bordered">
 <tr>
-    <th>Id</th>
-    <th>ArtistId</th>
-    <th>SceneId</th>
-    <th>ConcertName</th>
-    <th>ConcertDateTime</th>
-    <th>AudienceCount</th>
-    <th>Passed</th>
+    <th>Номер</th>
+    <th>Артист</th>
+    <th>Сцена</th>
+    <th>Название</th>
+    <th>Дата проведения</th>
+    <th>Количество зрителей</th>
+    <th>Прошедший</th>
 
     <c:forEach var="concert" items="${concerts}">
     <tr>
@@ -119,6 +120,11 @@ width:170px;
   <a href="/AddConcert" class="btn btn-block">Добавить новый концерт</a>
 
         <div style="display: flex; justify-content: center;margin-top: 20px;">
+            <ul style="list-style: none;">
+                <li><a href="/report" class="btn btn-end btn-block">Отчет</a></li>
+            </ul>
+        </div>
+        <div style="display: flex; justify-content: center;">
             <ul style="list-style: none;">
                 <li><a href="/layout" class="btn btn-end btn-block">Назад</a></li>
             </ul>

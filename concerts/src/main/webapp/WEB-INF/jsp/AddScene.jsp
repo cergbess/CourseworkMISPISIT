@@ -81,7 +81,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="sceneName">Scene Name</label>
+                <label class="col-md-3" for="sceneName">Название</label>
                 <div class="col-md-6">
                     <input type="text" name="sceneName" id="sceneName" class="form-control input-sm" required="required" />
                 </div>
@@ -90,7 +90,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="pricePerPerformance">Price Per Performance</label>
+                <label class="col-md-3" for="pricePerPerformance">Цена за выступление</label>
                 <div class="col-md-6">
                     <input type="number" name="pricePerPerformance" id="pricePerPerformance" class="form-control input-sm" required="required" />
                 </div>
@@ -99,7 +99,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="sceneSize">Scene Size</label>
+                <label class="col-md-3" for="sceneSize">Размер сцены</label>
                 <div class="col-md-6">
                     <input type="text" name="sceneSize" id="sceneSize" class="form-control input-sm" required="required" />
                 </div>
@@ -108,7 +108,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="audienceSeats">Audience Seats</label>
+                <label class="col-md-3" for="audienceSeats">Количество мест</label>
                 <div class="col-md-6">
                     <input type="number" name="audienceSeats" id="audienceSeats" class="form-control input-sm" required="required" />
                 </div>
@@ -117,7 +117,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="lightingDevices">Lighting Devices</label>
+                <label class="col-md-3" for="lightingDevices">Световые устройства</label>
                 <div class="col-md-6">
                     <input type="number" name="lightingDevices" id="lightingDevices" class="form-control input-sm" required="required" />
                 </div>
@@ -126,7 +126,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="soundSystems">Sound Systems</label>
+                <label class="col-md-3" for="soundSystems">Звуковые системы</label>
                 <div class="col-md-6">
                     <input type="number" name="soundSystems" id="soundSystems" class="form-control input-sm" required="required" />
                 </div>
@@ -135,7 +135,7 @@ padding: 0rem 0rem;
 
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="specialEffectsAndDecorations">Special Effects and Decorations</label>
+                <label class="col-md-3" for="specialEffectsAndDecorations">Спецэффекты и декорации</label>
                 <div class="col-md-6">
                     <input type="text" name="specialEffectsAndDecorations" id="specialEffectsAndDecorations" class="form-control input-sm" required="required" />
                 </div>
@@ -144,7 +144,7 @@ padding: 0rem 0rem;
 
         <div class="row p-2">
             <div class="col-md-2">
-                <button type="submit" value="Register" class="btn btn-success">Save</button>
+                <button type="submit" value="Register" class="btn btn-success">Сохранить</button>
             </div>
         </div>
 

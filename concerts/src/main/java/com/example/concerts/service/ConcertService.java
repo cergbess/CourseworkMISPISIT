@@ -12,7 +12,7 @@ import java.util.List;
 public class ConcertService {
     @Autowired
     IConcertRepository concertrepo;
-    public List<Concert> getConcertsByConcertName(String concertname) {
+    public Concert getConcertsByConcertName(String concertname) {
         return concertrepo.findByConcertName(concertname);
     }
     public List<Concert> getAllConcerts(){

@@ -14,10 +14,10 @@ public class Concert {
     private Long id;
 
     @Column(name = "artistid", nullable = false)
-    private Long artistId;
+    private String artistId;
 
     @Column(name = "sceneid", nullable = false)
-    private Long sceneId;
+    private String sceneId;
 
     @Column(name = "concertname", nullable = false)
     private String concertName;
@@ -43,19 +43,19 @@ public class Concert {
         this.id = id;
     }
 
-    public Long getArtistId() {
+    public String getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(Long artistId) {
+    public void setArtistId(String artistId) {
         this.artistId = artistId;
     }
 
-    public Long getSceneId() {
+    public String getSceneId() {
         return sceneId;
     }
 
-    public void setSceneId(Long sceneId) {
+    public void setSceneId(String sceneId) {
         this.sceneId = sceneId;
     }
 
